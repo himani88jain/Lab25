@@ -24,23 +24,14 @@ public class ApiService {
 		rt = new RestTemplateBuilder().additionalInterceptors(interceptor).build();
 	}
 	
-	public Data showWeatherForcast(double latitute,double longitute) {
+	public Weather showWeatherForcast(double latitute,double longitute) {
 		
 		String url="https://forecast.weather.gov/MapClick.php?lat={latitute}&lon={longitute}&FcstType=json";
 		
 		Weather response=rt.getForObject(url, Weather.class,latitute,longitute);
 		
-		return response.getData();
+		return response;
 		
 	}
-	public String showCityName(double lat,double lon) {
-		String url="https://forecast.weather.gov/MapClick.php?lat={lat}&lon={lon}&FcstType=json";
-		 Weather response=rt.getForObject(url,Weather.class,lat,lon);
-		 return response.getProductionCenter();
-	}
-	public String showDate(double lat,double lon) {
-		String url="https://forecast.weather.gov/MapClick.php?lat={lat}&lon={lon}&FcstType=json";
-		 Weather response=rt.getForObject(url,Weather.class,lat,lon);
-		 return response.getCreationDateLocal();
-	}
+	
 }

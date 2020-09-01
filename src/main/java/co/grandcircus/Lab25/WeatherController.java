@@ -28,11 +28,13 @@ public class WeatherController {
 	public String showTextData(@RequestParam("lat") Double latitude,
 								@RequestParam("lon") Double longitute,Model model) {
 		
-		Data data=apiServ.showWeatherForcast(latitude, longitute);
-		String cityName=apiServ.showCityName(latitude,longitute);
-		String date=apiServ.showDate(latitude, longitute);
-		model.addAttribute("cityName",cityName);
+		Weather weather=apiServ.showWeatherForcast(latitude, longitute);
+		Data data=weather.getData();
+		String cityName=weather.getProductionCenter();
+		String date=weather.getCreationDateLocal();
+		
 		model.addAttribute("data",data);
+		model.addAttribute("cityName",cityName);
 		model.addAttribute("date",date);
 		return "view";
 	}
